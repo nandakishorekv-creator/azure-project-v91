@@ -1,0 +1,108 @@
+#%RAML 1.0
+title: azure-project-v91
+version: v1
+baseUri: https://azure-project-v91.example.com/{version}
+mediaType: application/json
+
+/lead:
+  post:
+    description: "Create a new lead"
+    displayName: "Create Lead"
+    body:
+      application/json:
+        type: !include resources/schemas/PostLeadRequest.raml
+        example: !include resources/examples/PostLeadRequest.json
+    responses:
+      200:
+        body:
+          application/json:
+            type: !include resources/schemas/PostLeadResponse.raml
+            example: !include resources/examples/PostLeadResponse.json
+  get:
+    description: "Retrieve all lead"
+    displayName: "Get Lead"
+    responses:
+      200:
+        body:
+          application/json:
+            type: !include resources/schemas/GetLeadResponse.raml
+            example: !include resources/examples/GetLeadResponse.json
+  put:
+    description: "Update lead collection"
+    displayName: "Update Lead"
+    body:
+      application/json:
+        type: !include resources/schemas/PutLeadRequest.raml
+        example: !include resources/examples/PutLeadRequest.json
+    responses:
+      200:
+        body:
+          application/json:
+            type: !include resources/schemas/PutLeadResponse.raml
+            example: !include resources/examples/PutLeadResponse.json
+  delete:
+    description: "Delete lead collection"
+    displayName: "Delete Lead"
+    responses:
+      200:
+        body:
+          application/json:
+            type: !include resources/schemas/DeleteLeadResponse.raml
+            example: !include resources/examples/DeleteLeadResponse.json
+
+/opportunity:
+  post:
+    description: "Create a new opportunity"
+    displayName: "Create Opportunity"
+    body:
+      application/json:
+        type: !include resources/schemas/PostOpportunityRequest.raml
+        example: !include resources/examples/PostOpportunityRequest.json
+    responses:
+      200:
+        body:
+          application/json:
+            type: !include resources/schemas/PostOpportunityResponse.raml
+            example: !include resources/examples/PostOpportunityResponse.json
+  get:
+    description: "Retrieve all opportunity"
+    displayName: "Get Opportunity"
+    responses:
+      200:
+        body:
+          application/json:
+            type: !include resources/schemas/GetOpportunityResponse.raml
+            example: !include resources/examples/GetOpportunityResponse.json
+  put:
+    description: "Update opportunity collection"
+    displayName: "Update Opportunity"
+    body:
+      application/json:
+        type: !include resources/schemas/PutOpportunityRequest.raml
+        example: !include resources/examples/PutOpportunityRequest.json
+    responses:
+      200:
+        body:
+          application/json:
+            type: !include resources/schemas/PutOpportunityResponse.raml
+            example: !include resources/examples/PutOpportunityResponse.json
+  delete:
+    description: "Delete opportunity collection"
+    displayName: "Delete Opportunity"
+    responses:
+      200:
+        body:
+          application/json:
+            type: !include resources/schemas/DeleteOpportunityResponse.raml
+            example: !include resources/examples/DeleteOpportunityResponse.json
+
+/health:
+  get:
+    description: "Retrieve all health"
+    displayName: "Get Health"
+    responses:
+      200:
+        body:
+          application/json:
+            type: !include resources/schemas/GetHealthResponse.raml
+            example: !include resources/examples/GetHealthResponse.json

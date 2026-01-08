@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns="http://www.mulesoft.org/schema/mule/core"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+      xmlns:secure-properties="http://www.mulesoft.org/schema/mule/secure-properties"
+      xmlns:http="http://www.mulesoft.org/schema/mule/http"
+      xmlns:tls="http://www.mulesoft.org/schema/mule/tls"
+      xmlns:salesforce="http://www.mulesoft.org/schema/mule/salesforce"
+      xmlns:api-gateway="http://www.mulesoft.org/schema/mule/api-gateway"
+      xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd http://www.mulesoft.org/schema/mule/secure-properties http://www.mulesoft.org/schema/mule/secure-properties/current/mule-secure-properties.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/tls http://www.mulesoft.org/schema/mule/tls/current/mule-tls.xsd http://www.mulesoft.org/schema/mule/salesforce http://www.mulesoft.org/schema/mule/salesforce/current/mule-salesforce.xsd http://www.mulesoft.org/schema/mule/api-gateway http://www.mulesoft.org/schema/mule/api-gateway/current/mule-api-gateway.xsd">
+  <configuration defaultErrorHandler-ref="globalErrorHandler" />
+  <configuration-properties doc:name="Configuration properties" file="properties/common-properties.yaml" />
+  <secure-properties:config name="Secure_Properties_Config" file="properties/secure-${mule.env}.yaml" key="${encryption.key}" doc:name="Secure Properties Config" />
+  <http:listener-config name="HTTPS_Listener_config" doc:name="HTTPS Listener config" doc:id="https-listener-config-001">
+    <http:listener-connection host="${http.host}" port="${http.port}" protocol="${http.protocol}" tlsContext="TLS_Context" doc:id="doc-40834aff" readTimeout="${http.timeout}" />
+  </http:listener-config>
+  <tls:context name="TLS_Context" doc:name="TLS Context" doc:id="tls-context-001">
+    <tls:key-store path="${tls.keystore.path}" password="${secure::tls.keystore.password}" alias="${tls.keystore.alias}" keyPassword="${secure::tls.key.password}" doc:id="doc-16891e28" />
+  </tls:context>
+  <salesforce:sfdc-config name="Salesforce_Config" doc:name="Salesforce Config" doc:id="salesforce-config-001">
+    <salesforce:basic-connection username="${secure::salesforce.username}" password="${secure::salesforce.password}" securityToken="${secure::salesforce.token}" url="${salesforce.url}" doc:id="doc-4df1d2ce" />
+  </salesforce:sfdc-config>
+  <api-gateway:autodiscovery apiId="${api.id}" ignoreBasePath="true" flowRef="azure-project-v91-api-main" doc:name="API Autodiscovery" doc:id="420d56c1-fbd9-e712-bb86-b12cb5db7094" />
+
+</mule>
